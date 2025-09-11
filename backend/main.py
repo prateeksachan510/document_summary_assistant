@@ -9,7 +9,7 @@ app = FastAPI()
 origins = [
     "http://localhost:5173",
     "http://localhost:3000",
-    "https://your-project-name.vercel.app", # <-- MAKE SURE YOUR VERCEL URL IS HERE
+    "https://docsummaryps510-j90iisbje-uranium238s-projects.vercel.app/", # <-- MAKE SURE YOUR VERCEL URL IS HERE
 ]
 
 app.add_middleware(
