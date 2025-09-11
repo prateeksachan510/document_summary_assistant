@@ -2,7 +2,7 @@
 
 A full-stack web application that takes any document (PDF or Image) and generates intelligent, multi-length summaries using AI. This project also features automatic language detection and translation to English for multilingual documents.
 
-**Live Demo URL:** [Your Live Vercel URL Will Go Here]
+**Live Demo URL:** https://docsummaryps510-j90iisbje-uranium238s-projects.vercel.app/
 
 ---
 
