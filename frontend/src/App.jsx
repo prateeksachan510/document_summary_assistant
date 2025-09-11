@@ -1,7 +1,6 @@
 import { useState, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import axios from 'axios';
-// Import React-Bootstrap components
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
@@ -55,7 +54,7 @@ function App() {
     formData.append('file', file);
     formData.append('summary_length', summaryLength);
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/summarize', formData, {
+      const response = await axios.post('https://doc-summary-ps510.onrender.com/api/summarize', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       setSummary(response.data.summary);
@@ -67,7 +66,6 @@ function App() {
     }
   };
 
-  // Custom style for the dropzone
   const dropzoneStyle = {
     border: '2px dashed #adb5bd',
     borderRadius: '.375rem',
