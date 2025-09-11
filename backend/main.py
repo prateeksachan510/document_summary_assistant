@@ -1,14 +1,15 @@
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from text_extractor import extract_text_from_pdf, extract_text_from_image
-# Import both functions from the summarizer module
 from summarizer import generate_summary, translate_to_english
 
 app = FastAPI()
 
+# THIS IS THE CRITICAL SECTION TO FIX
 origins = [
     "http://localhost:5173",
     "http://localhost:3000",
+    "https://your-project-name.vercel.app", # <-- MAKE SURE YOUR VERCEL URL IS HERE
 ]
 
 app.add_middleware(
@@ -38,12 +39,7 @@ async def summarize_document(
         if not extracted_text.strip():
             raise HTTPException(status_code=400, detail="Could not extract any text from the document.")
 
-        # --- NEW TRANSLATION STEP ---
-        # First, translate the extracted text to English.
         translated_text = translate_to_english(extracted_text)
-        # --- END OF NEW STEP ---
-
-        # Then, generate the summary from the translated text.
         summary = generate_summary(translated_text, summary_length)
 
         return {"summary": summary, "original_text_length": len(extracted_text)}
