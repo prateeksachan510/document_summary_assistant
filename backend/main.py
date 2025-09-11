@@ -6,11 +6,7 @@ from summarizer import generate_summary, translate_to_english
 app = FastAPI()
 
 # THIS IS THE CRITICAL SECTION TO FIX
-origins = [
-    "http://localhost:5173",
-    "http://localhost:3000",
-    "https://docsummaryps510-j90iisbje-uranium238s-projects.vercel.app/", # <-- MAKE SURE YOUR VERCEL URL IS HERE
-]
+origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,
