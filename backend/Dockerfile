@@ -4,26 +4,22 @@ FROM python:3.11-slim
 # Set the working directory inside the container
 WORKDIR /app
 
-# --- This is the important part ---
-# Install system dependencies, including Tesseract and language packs
-# This command runs as root inside the container, so it has permissions
+# Install system dependencies
+# Added 'tesseract-ocr-mal' for Malayalam support
 RUN apt-get update && apt-get install -y \
     tesseract-ocr \
     tesseract-ocr-hin \
     tesseract-ocr-urd \
+    tesseract-ocr-mal \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy your Python requirements file into the container
+# Copy requirements and install Python dependencies
 COPY requirements.txt .
-
-# Install your Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of your backend application code into the container
+# Copy the rest of the application
 COPY . .
 
-# Tell Docker that your app runs on port 8000
-EXPOSE 8000
-
-# The command that will be run to start your application
-CMD python -m uvicorn main:app --host 0.0.0.0 --port $PORT
+# Render assigns a random port to the $PORT variable automatically.
+# We use the "shell form" (no brackets) so $PORT is read correctly.
+CMD uvicorn main:app --host 0.0.0.0 --port $PORT
